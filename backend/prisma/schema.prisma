@@ -1,0 +1,118 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  CANDIDATE
+  HR
+}
+
+enum FeedbackStatus {
+  APPLIED
+  GOT_RESPONSE
+  INTERVIEW_SCHEDULED
+  REJECTED
+  NO_RESPONSE
+  CUSTOM_COMMENT
+}
+
+model User {
+  id           String   @id @default(uuid())
+  name         String
+  email        String   @unique
+  password     String
+  role         Role
+  company      String?
+  refreshToken String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Candidate relations
+  resumes         Resume[]
+  jobPreferences  JobPreference[]
+  feedbacks       Feedback[]
+  receivedMessages HRMessage[]      @relation("CandidateMessages")
+
+  // HR relations
+  sentMessages HRMessage[] @relation("HRMessages")
+
+  @@map("users")
+}
+
+model Resume {
+  id            String   @id @default(uuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  fileUrl       String
+  fileName      String
+  mimeType      String
+  extractedData Json?
+  skills        String[] @default([])
+  education     Json?
+  experience    Json?
+  technologies  String[] @default([])
+  status        String   @default("PENDING") // PENDING | PROCESSED | FAILED
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([userId])
+  @@map("resumes")
+}
+
+model JobPreference {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  roleName  String
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@map("job_preferences")
+}
+
+model CareerLink {
+  id         String     @id @default(uuid())
+  companyName String
+  careerUrl  String
+  roleName   String
+  source     String?    // e.g. which search query produced it
+  createdAt  DateTime   @default(now())
+  feedbacks  Feedback[]
+
+  @@index([roleName])
+  @@map("career_links")
+}
+
+model Feedback {
+  id           String         @id @default(uuid())
+  userId       String
+  user         User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  careerLinkId String
+  careerLink   CareerLink     @relation(fields: [careerLinkId], references: [id], onDelete: Cascade)
+  status       FeedbackStatus
+  comment      String?
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+
+  @@index([userId])
+  @@index([careerLinkId])
+  @@map("feedbacks")
+}
+
+model HRMessage {
+  id          String   @id @default(uuid())
+  hrId        String
+  hr          User     @relation("HRMessages", fields: [hrId], references: [id], onDelete: Cascade)
+  candidateId String
+  candidate   User     @relation("CandidateMessages", fields: [candidateId], references: [id], onDelete: Cascade)
+  message     String
+  createdAt   DateTime @default(now())
+
+  @@index([hrId, candidateId])
+  @@map("hr_messages")
+}

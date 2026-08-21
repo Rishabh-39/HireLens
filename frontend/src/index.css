@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-base-950 text-ink-100 font-body antialiased;
+    background-image: var(--tw-gradient-stops, none);
+  }
+  h1, h2, h3, h4 {
+    @apply font-display;
+  }
+  ::selection {
+    @apply bg-signal-cyan/30 text-ink-100;
+  }
+  *:focus-visible {
+    outline: 2px solid theme('colors.signal.cyan');
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .panel {
+    @apply relative rounded-2xl border border-base-600/60 bg-base-800/60 backdrop-blur-sm;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-signal-cyan px-5 py-2.5 font-medium text-base-950 transition-all hover:shadow-glow hover:brightness-110 disabled:opacity-50 disabled:pointer-events-none;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-base-600 bg-base-800 px-5 py-2.5 font-medium text-ink-100 transition-all hover:border-signal-violet/60 hover:shadow-glow-violet disabled:opacity-50 disabled:pointer-events-none;
+  }
+
+  .input-field {
+    @apply w-full rounded-lg border border-base-600 bg-base-900 px-4 py-2.5 text-ink-100 placeholder:text-ink-500 outline-none transition-colors focus:border-signal-cyan;
+  }
+
+  .badge {
+    @apply inline-flex items-center rounded-full border border-base-600 bg-base-800 px-2.5 py-1 font-mono text-xs text-signal-cyan;
+  }
+
+  .scan-surface {
+    @apply relative overflow-hidden;
+    background-image: repeating-linear-gradient(
+      0deg,
+      rgba(45, 226, 230, 0.045) 0px,
+      rgba(45, 226, 230, 0.045) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+  }
+
+  .scan-sweep::before {
+    content: '';
+    @apply pointer-events-none absolute inset-x-0 h-24 animate-sweep;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(45, 226, 230, 0.16) 50%,
+      transparent 100%
+    );
+  }
+}

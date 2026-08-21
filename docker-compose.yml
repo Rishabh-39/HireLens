@@ -1,0 +1,52 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: hirelens-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: hirelens
+      POSTGRES_PASSWORD: hirelens
+      POSTGRES_DB: hirelens
+    ports:
+      - '5432:5432'
+    volumes:
+      - hirelens_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U hirelens']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+    container_name: hirelens-backend
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    env_file:
+      - ./backend/.env
+    environment:
+      DATABASE_URL: postgresql://hirelens:hirelens@postgres:5432/hirelens?schema=public
+      CORS_ORIGIN: http://localhost:5173,http://localhost:80
+    ports:
+      - '4000:4000'
+    volumes:
+      - hirelens_uploads:/app/uploads
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: hirelens-frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - '5173:80'
+
+volumes:
+  hirelens_pgdata:
+  hirelens_uploads:
