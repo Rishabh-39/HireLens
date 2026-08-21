@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:667eea,100:764ba2&height=200&section=header&text=HireLens&fontSize=80&fontColor=white&fontAlignY=38&desc=AI-Powered%20Job%20Discovery%20%26%20Recruitment&descAlignY=60&descSize=18" />
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:38bdf8,100:0ea5e9&height=200&section=header&text=HireLens&fontSize=80&fontColor=white&fontAlignY=38&desc=AI-Powered%20Job%20Discovery%20and%20Recruitment&descAlignY=60&descSize=18" />
 
 <br/>
 
@@ -203,6 +203,6 @@ See Swagger (`/api/docs`) for the full contract.
 
 If this project helped you or you liked it, drop a ⭐ — it means a lot!
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:667eea,100:764ba2&height=100&section=footer"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:38bdf8,100:0ea5e9&height=100&section=footer"/>
 
 </div>
