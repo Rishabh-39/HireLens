@@ -32,7 +32,7 @@ export function DashboardShell({
   };
 
   return (
-    <div className="flex min-h-screen bg-base-950 bg-grid-fade">
+    <div className="flex h-screen overflow-hidden bg-base-950 bg-grid-fade">
       <aside className="flex w-64 shrink-0 flex-col border-r border-base-700/60 bg-base-900/60 px-4 py-6 backdrop-blur-sm">
         <div className="mb-8 flex items-center gap-2 px-2">
           <span className="h-2 w-2 rounded-full bg-signal-cyan animate-pulseDot" />
