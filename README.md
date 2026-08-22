@@ -4,6 +4,11 @@
 
 <br/>
 
+[![Live Demo](https://img.shields.io/badge/🚀%20Live%20Demo-667eea?style=for-the-badge)](https://hire-lens-one-ashy.vercel.app/)
+
+<br/>
+
+
 ![React](https://img.shields.io/badge/React%20(Vite)-20232A?style=flat-square&logo=react&logoColor=61DAFB)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
 ![NestJS](https://img.shields.io/badge/NestJS-E0234E?style=flat-square&logo=nestjs&logoColor=white)
