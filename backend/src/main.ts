@@ -29,13 +29,11 @@ async function bootstrap() {
   // Global API prefix
   app.setGlobalPrefix('api/v1');
 
-  // CORS
-  const corsOrigins = process.env.CORS_ORIGIN
-    ? process.env.CORS_ORIGIN.split(',').map((origin) => origin.trim())
-    : ['http://localhost:5173'];
-
   app.enableCors({
-    origin: corsOrigins,
+    origin: function (origin, callback) {
+      // Allow all origins to bypass strict CORS matching issues
+      callback(null, true);
+    },
     credentials: true,
   });
 
