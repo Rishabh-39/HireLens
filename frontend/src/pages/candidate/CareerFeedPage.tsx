@@ -80,7 +80,7 @@ export function CareerFeedPage() {
                   href={link.careerUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="mt-1 flex items-center gap-1 text-sm text-signal-cyan hover:underline"
+                  className="mt-1 flex items-center gap-1 text-sm text-signal-cyan hover:underline min-w-0 w-full"
                 >
                   <span className="truncate">{link.careerUrl}</span> <ExternalLink size={12} className="shrink-0" />
                 </a>
@@ -97,7 +97,7 @@ export function CareerFeedPage() {
               </div>
               <button
                 onClick={() => setActiveLink({ id: link.id, company: link.companyName })}
-                className="btn-secondary shrink-0"
+                className="btn-secondary shrink-0 whitespace-nowrap"
               >
                 <MessageCircle size={16} /> Add feedback
               </button>
