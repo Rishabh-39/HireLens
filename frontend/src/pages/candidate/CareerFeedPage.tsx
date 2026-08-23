@@ -80,9 +80,9 @@ export function CareerFeedPage() {
                   href={link.careerUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="mt-1 flex items-center gap-1 text-sm text-signal-cyan hover:underline min-w-0 w-full"
+                  className="mt-1 flex items-center gap-1 text-sm text-signal-cyan hover:underline min-w-0 w-fit max-w-full"
                 >
-                  <span className="truncate">{link.careerUrl}</span> <ExternalLink size={12} className="shrink-0" />
+                  <span className="truncate block">{link.careerUrl}</span> <ExternalLink size={12} className="shrink-0" />
                 </a>
                 {link.feedbacks?.length > 0 && (
                   <div className="mt-2 flex flex-wrap gap-1.5">
