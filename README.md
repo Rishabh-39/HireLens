@@ -112,75 +112,6 @@ HR searches candidates by skill/role, views AI insights, sends up to 3 messages
 
 ---
 
-## 🚀 Quick Start (Docker)
-
-```bash
-cd hirelens
-cp backend/.env.example backend/.env
-# fill in JWT secrets, GEMINI_API_KEY, and ADZUNA_APP_ID / ADZUNA_API_KEY in backend/.env
-
-docker compose up --build
-```
-
-| Service | URL |
-|---|---|
-| Frontend | http://localhost:5173 |
-| Backend API | http://localhost:4000/api/v1 |
-| Swagger Docs | http://localhost:4000/api/docs |
-| Postgres | localhost:5432 (user/pass/db: `hirelens`) |
-
-The backend container runs `prisma migrate deploy` automatically on startup. To seed demo accounts (`candidate@hirelens.dev` / `hr@hirelens.dev`, password `Password@123`):
-
-```bash
-docker compose exec backend npm run prisma:seed
-```
-
----
-
-## 🧰 Manual Setup (without Docker)
-
-### 1. Database
-```bash
-# any local Postgres works — or run just the db service:
-docker compose up postgres -d
-```
-
-### 2. Backend
-```bash
-cd backend
-cp .env.example .env       # fill in DATABASE_URL, JWT secrets, GEMINI_API_KEY, ADZUNA_*
-npm install
-npx prisma migrate dev --name init
-npm run prisma:seed        # optional demo accounts
-npm run start:dev
-```
-API runs on http://localhost:4000, Swagger on http://localhost:4000/api/docs.
-
-### 3. Frontend
-```bash
-cd frontend
-npm install
-npm run dev
-```
-App runs on http://localhost:5173 and proxies `/api` to the backend.
-
----
-
-## 🔑 Environment Variables
-
-### `backend/.env`
-
-| Variable | Purpose |
-|---|---|
-| `DATABASE_URL` | Postgres connection string |
-| `JWT_ACCESS_SECRET` / `JWT_REFRESH_SECRET` | JWT signing secrets (set to long random strings) |
-| `JWT_ACCESS_EXPIRY` / `JWT_REFRESH_EXPIRY` | Token lifetimes (default `15m` / `7d`) |
-| `GEMINI_API_KEY` | Google Gemini API key for resume analysis. Without it, analysis returns an empty stub instead of failing |
-| `ADZUNA_APP_ID` / `ADZUNA_API_KEY` | Adzuna API credentials for live job listings |
-| `CORS_ORIGIN` | Comma-separated list of allowed frontend origins |
-
----
-
 ## 📡 Core API Groups
 
 See Swagger (`/api/docs`) for the full contract.
@@ -201,6 +132,19 @@ See Swagger (`/api/docs`) for the full contract.
 - **Resume analysis** calls Gemini (`gemini-1.5-flash` by default) with the extracted resume text and asks for strict JSON back. If `GEMINI_API_KEY` isn't set, or the call fails, the resume is still saved but marked `FAILED` / analysis falls back to empty arrays rather than crashing the request.
 - **Job discovery** aggregates listings from Adzuna (API key required) and public ATS board APIs (Greenhouse, Lever, Ashby — no keys needed). The service queries these sources by role name and returns matching live openings.
 - **File storage** is local disk (`backend/uploads/resumes`), served statically and referenced by `fileUrl` on the `Resume` model. Swap in S3 by changing `multer.config.ts` to use `multer-s3` and updating `fileUrl` generation — nothing else in the codebase assumes local disk.
+
+---
+
+## 🙋‍♂️ Made by
+
+<div align="center">
+
+**Rishabh Tomar😉**
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/rishabh-tomar-8a7885243/)
+[![Email](https://img.shields.io/badge/Email-Say%20Hi-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:rishabhtomar.in@gmail.com)
+
+</div>
 
 ---
 
