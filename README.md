@@ -4,7 +4,7 @@
 
 <br/>
 
-[![Live Demo](https://img.shields.io/badge/🚀%20Live%20Demo-667eea?style=for-the-badge)](https://hire-lens-one-ashy.vercel.app/)
+[![Live Demo](https://img.shields.io/badge/🚀%20Live%20Demo-1C74A1?style=for-the-badge)](https://hire-lens-one-ashy.vercel.app/)
 
 <br/>
 
