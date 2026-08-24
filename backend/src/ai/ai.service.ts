@@ -41,7 +41,7 @@ export class AiService {
     this.logger.log(`Analyzing resume text (${resumeText.length} chars)...`);
 
     try {
-      const modelName = this.config.get<string>('GEMINI_MODEL') ?? 'gemini-1.5-flash';
+      const modelName = this.config.get<string>('GEMINI_MODEL') ?? 'gemini-2.5-flash';
       this.logger.log(`Using Gemini model: ${modelName}`);
 
       const model = this.genAI.getGenerativeModel({ model: modelName });
