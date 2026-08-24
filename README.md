@@ -112,21 +112,6 @@ HR searches candidates by skill/role, views AI insights, sends up to 3 messages
 
 ---
 
-## 📡 Core API Groups
-
-See Swagger (`/api/docs`) for the full contract.
-
-- `POST /api/v1/auth/candidate/register|login`, `/auth/hr/register|login`, `/auth/refresh`, `/auth/logout`
-- `GET|PATCH /api/v1/users/me`, `POST /api/v1/users/me/job-preferences`
-- `POST /api/v1/resume/upload`, `GET /api/v1/resume/me`, `GET /api/v1/resume/:id`
-- `POST /api/v1/job-discovery/search`, `GET /api/v1/job-discovery/feed`
-- `POST /api/v1/feedback`, `GET /api/v1/feedback/mine|career-link/:id` (paginated)
-- `GET /api/v1/hr/candidates` (search by `skill`/`role`, paginated), `GET /api/v1/hr/candidates/:id`
-- `POST /api/v1/hr/messages` (max 3 per candidate), `GET /api/v1/hr/messages/:candidateId`
-- `GET /api/v1/hr/inbox/me` (candidate: view received HR messages)
-
----
-
 ## 🧠 Notes on the AI & Web Search Integrations
 
 - **Resume analysis** calls Gemini (`gemini-1.5-flash` by default) with the extracted resume text and asks for strict JSON back. If `GEMINI_API_KEY` isn't set, or the call fails, the resume is still saved but marked `FAILED` / analysis falls back to empty arrays rather than crashing the request.
