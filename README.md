@@ -114,7 +114,7 @@ HR searches candidates by skill/role, views AI insights, sends up to 3 messages
 
 ## 🧠 Notes on the AI & Web Search Integrations
 
-- **Resume analysis** calls Gemini (`gemini-1.5-flash` by default) with the extracted resume text and asks for strict JSON back. If `GEMINI_API_KEY` isn't set, or the call fails, the resume is still saved but marked `FAILED` / analysis falls back to empty arrays rather than crashing the request.
+- **Resume analysis** calls Gemini (`gemini-3.6-flash` by default) with the extracted resume text and asks for strict JSON back. If `GEMINI_API_KEY` isn't set, or the call fails, the resume is still saved but marked `FAILED` / analysis falls back to empty arrays rather than crashing the request.
 - **Job discovery** aggregates listings from Adzuna (API key required) and public ATS board APIs (Greenhouse, Lever, Ashby — no keys needed). The service queries these sources by role name and returns matching live openings.
 - **File storage** is local disk (`backend/uploads/resumes`), served statically and referenced by `fileUrl` on the `Resume` model. Swap in S3 by changing `multer.config.ts` to use `multer-s3` and updating `fileUrl` generation — nothing else in the codebase assumes local disk.
 
